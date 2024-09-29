@@ -1,0 +1,39 @@
+I am integrating React to use @FluentUI/react-components.
+1- building the project shows 2000+ messages from node_modules @mui+matrials on "use client" was ignored.
+2- can not start the project hence errors in src/integrations/react/mui.tsx - but can workaround it
+3- Add ESM package of @fluentui/react-components and use Input module errs on runtime trying to use CommonJS Error: [vite] Named export 'Input' not found. The requested module '@fluentui/react-components' is a CommonJS module, which may not support all module.exports as named exports.
+
+
+
+1-created qwik project from latest : pnpm create qwik@latest
+2-successfully started the project: pnpm run build && pnpm run dev.debug
+3- I added react : pnpm run qwik add react
+4- @MUI is installed
+5- pnpm run build ->you will get 2000+ messages from node_modules @mui+matrials on "use client"  was ignored.
+6- pnpm run dev.debug - >Start the project and you will get errors on src/integrations/react/mui.tsx on deprecated DataGrid props of pageSize, rowsPerPageOptions, anddisableSelectionOnClick. 
+```      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          // pageSize={5}
+          // rowsPerPageOptions={[5]}
+          checkboxSelection
+          // disableSelectionOnClick
+        />
+      </div>
+```
+7- remove these props and you can run the  project
+8- pnpm install @fluentui/react-components ( supports ESM)
+9- add a react component using Input from @fluentui/react-components ( check repo)
+10 - pnpm run build & pnpm run dev.debug -> error 
+```
+[vite] Named export 'Input' not found. The requested module '@fluentui/react-components' is a CommonJS module, which may not support all module.exports as named exports.
+CommonJS modules can always be imported via the default export, for example using:
+
+import pkg from '@fluentui/react-components';
+const {Input} = pkg;
+```
+
+
+URL: https://stackblitz.com/edit/github-4evy3u?file=src%2Froutes%2Findex.tsx
+https://github-4evy3u.stackblitz.io
